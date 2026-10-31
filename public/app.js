@@ -152,7 +152,21 @@ async function openResourceModal(resource,row=null){
     const value=row?row[field.name]:(field.name==='status'?(resource==='loans'?'Pending':'Active'):field.name==='open_date'||field.name==='join_date'||field.name==='start_date'?new Date().toISOString().slice(0,10):field.name==='balance'?'0':'');
     let input='';
     if(field.type==='select'){
-      const opts=Array.isArray(field.options)?field.options.map(x=>[x,x]):(related[field.name]||[]).map(x=>[x.bank_id||x.branch_id,x.bank_name||x.branch_name]);
+      
+const opts = Array.isArray(field.options)
+  ? field.options.map(x => [x, x])
+  : (related[field.name] || []).map(x => {
+      if (field.options === 'banks') {
+        return [x.bank_id, x.bank_name];
+      }
+
+      if (field.options === 'branches') {
+        return [x.branch_id, `${x.branch_name} — ${x.city}`];
+      }
+
+      return [x.id, x.name];
+    });
+
       input=`<select name="${field.name}" ${field.required?'required':''}><option value="">Choose ${field.label.toLowerCase()}</option>${opts.map(([v,label])=>`<option value="${escapeHTML(v)}" ${String(value??'')===String(v)?'selected':''}>${escapeHTML(label)}</option>`).join('')}</select>`;
     }else input=`<input name="${field.name}" type="${field.type}" value="${escapeHTML(value??'')}" ${field.required?'required':''} ${field.type==='number'?'step="0.01" min="0"':''} placeholder="${escapeHTML(field.label)}"/>`;
     return `<div class="field"><label>${field.label}${field.required?' *':''}</label>${input}</div>`;
