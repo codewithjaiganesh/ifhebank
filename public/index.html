@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111117" />
+  <meta name="description" content="BranchFlow — a modern bank branch management workspace." />
+  <title>BranchFlow — Banking, made clear</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <section class="login-art">
+      <div class="login-art-top"><div class="brand-mark">V</div><div><span class="brand-name">velora</span><span class="brand-sub">BANKING GROUP</span></div><span class="art-pill">PRIVATE BANKING · 2026</span></div>
+      <div class="art-copy"><p class="eyebrow light">A clearer way to move forward</p><h1>Banking that<br><em>moves with you.</em></h1><p class="art-description">One considered view of every branch, every account, every relationship.</p></div>
+      <div class="card-stack" aria-hidden="true"><div class="floating-card card-back card-back-one"></div><div class="floating-card card-back card-back-two"></div><div class="floating-card bank-card"><div class="card-chip"></div><div class="card-chipline">•••• &nbsp; •••• &nbsp; •••• &nbsp; 2048</div><div class="card-bottom"><span>VELORA SIGNATURE</span><span>VISA</span></div><div class="card-glow"></div></div></div>
+      <div class="art-foot"><span><i class="pulse-dot"></i> YOUR BRANCH NETWORK, IN SYNC</span><span>SECURE WORKSPACE</span></div>
+      <div class="art-orb orb-one"></div><div class="art-orb orb-two"></div>
+    </section>
+    <section class="login-form-wrap">
+      <div class="mobile-brand"><div class="brand-mark">V</div><span class="brand-name">velora</span></div>
+      <div class="login-form-card"><div class="form-kicker">BRANCHFLOW WORKSPACE</div><h2>Welcome back<span class="accent-dot">.</span></h2><p class="muted">Sign in to manage your banking operations.</p>
+        <form id="login-form">
+          <label for="login-email">Email address</label><div class="input-with-icon"><span>✉</span><input id="login-email" type="email" autocomplete="username" placeholder="you@velorabank.demo" required /></div>
+          <div class="label-row"><label for="login-password">Password</label><span class="muted tiny">Administrator access</span></div><div class="input-with-icon"><span>⌑</span><input id="login-password" type="password" autocomplete="current-password" placeholder="Enter your password" required /><button type="button" class="reveal-btn" id="toggle-password">Show</button></div>
+          <p id="login-error" class="form-error" role="alert"></p>
+          <button class="btn btn-primary btn-wide" type="submit"><span>Sign in to workspace</span><b>↗</b></button>
+        </form>
+        <div class="login-divider"><span></span><small>SECURE ACCESS</small><span></span></div><p class="login-note">Your workspace is protected with encrypted passwords and signed sessions.</p>
+      </div>
+      <div class="login-bottom"><span>© 2026 Velora Bank · BranchFlow</span><span>DEMO MANAGEMENT PORTAL</span></div>
+    </section>
+  </div>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><div class="brand-mark">V</div><div><span class="brand-name">velora</span><span class="brand-sub">BRANCHFLOW</span></div><button class="sidebar-close" id="sidebar-close" aria-label="Close menu">×</button></div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="main-nav" id="main-nav">
+        <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span>Overview</button>
+        <div class="nav-caption">BANKING OPERATIONS</div>
+        <button class="nav-item" data-page="banks"><span class="nav-icon">▤</span>Banks</button>
+        <button class="nav-item" data-page="branches"><span class="nav-icon">⌖</span>Branches</button>
+        <button class="nav-item" data-page="employees"><span class="nav-icon">♙</span>Employees</button>
+        <button class="nav-item" data-page="accounts"><span class="nav-icon">▣</span>Accounts</button>
+        <button class="nav-item" data-page="loans"><span class="nav-icon">◈</span>Loans</button>
+        <button class="nav-item" data-page="transactions"><span class="nav-icon">↗</span>Transactions</button>
+        <div class="nav-caption">INSIGHTS</div>
+        <button class="nav-item" data-page="reports"><span class="nav-icon">▥</span>Reports</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-card"><div class="side-card-orb"></div><span class="side-card-label">BRANCH NETWORK</span><strong>Connected.</strong><small>All your operations, one view.</small><div class="side-card-foot"><span><i class="pulse-dot"></i> SYSTEM ONLINE</span><span>↗</span></div></div>
+        <button class="profile-button" id="profile-button"><span class="avatar" id="user-avatar">VA</span><span class="profile-text"><b id="user-name">Administrator</b><small id="user-role">Workspace admin</small></span><span class="profile-more">•••</span></button>
+        <button class="signout-link" id="logout-button">↗ &nbsp; Sign out</button>
+      </div>
+    </aside>
+    <div class="main-area">
+      <header class="topbar"><div class="topbar-left"><button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button><div><div class="breadcrumb">VELORA BANK <span>/</span> <b id="crumb-current">OVERVIEW</b></div><div class="topbar-date" id="today-date"></div></div></div><div class="topbar-right"><div class="secure-status"><i class="pulse-dot"></i> SECURE SESSION</div><button class="icon-btn" id="refresh-button" title="Refresh data">↻</button><div class="top-avatar" id="top-avatar">VA</div></div></header>
+      <main id="page-content" class="page-content"><div class="loading-state"><div class="loader"></div><span>Loading your workspace…</span></div></main>
+      <footer class="app-footer"><span>VELORA BANK · BRANCHFLOW MANAGEMENT</span><span>DEMO ENVIRONMENT · NOT A LIVE BANKING NETWORK</span></footer>
+    </div>
+  </div>
+  <div id="modal-root"></div>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+</body>
+</html>
