@@ -1,6 +1,8 @@
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 const TOKEN_KEY = 'branchflow_session';
+const API_BASE = 'https://ifhebank.onrender.com';
+
 const state = { token: localStorage.getItem(TOKEN_KEY), user: null, page: 'dashboard', cache: {}, dashboard: null };
 const INR = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
 const RESOURCE_META = {
@@ -43,7 +45,7 @@ async function api(url, options={}){
   const headers={...(options.headers||{})};
   if(options.body && !(options.body instanceof FormData)) headers['Content-Type']='application/json';
   if(state.token) headers.Authorization=`Bearer ${state.token}`;
-  const response=await fetch(url,{...options,headers});
+  const response = await fetch(`${API_BASE}${url}`, {...options, headers});
   const data=await response.json().catch(()=>({}));
   if(response.status===401 && url!=='/api/auth/login'){logout(false);throw new Error('Your session expired. Please sign in again.');}
   if(!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
